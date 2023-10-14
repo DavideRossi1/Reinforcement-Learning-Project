@@ -7,6 +7,9 @@ class TDControl():
         Calculates optimal policy using in-policy Temporal Difference control
         Evaluates Q-value for (S,A) pairs, using one-step updates.
         """
+        
+        assert algorithm in ['SARSA','Qlearning','ExpectedSARSA'], "Algorithm not recognized"
+        
         self.gamma = gamma             # discount factor
         self.space_size = space_size   # size of system
         self.action_size = action_size # number of actions
@@ -55,56 +58,7 @@ class TDControl():
         return a
             
     def save_policy(self): # saves the policy in a txt file
-        comments="Algorithm: {}, Speed: {}, Environment size: {}, Car size: {}, Counter: {}, Nsteps: {}".format(C.AGENT,C.SPEED,C.ENVSIZE,C.CARSIZE,C.COUNTER,C.NSTEPS)
+        comments="Algorithm: {}, Speed: {}, Boost: {}, PM: {}, Environment size: {}, Car size: {}, Counter: {}, Nsteps: {}".format(C.AGENT,C.SPEED,C.BOOST,C.PACMAN,C.ENVSIZE,C.CARSIZE,C.COUNTER,C.NSTEPS)
         oneDQval=np.reshape(self.Qvalues,C.QSIZE)
         np.savetxt(C.EXPORTPOLICY,oneDQval,header=comments)
-    
-    
-    
-    
-    # def list_states(upper_bounds):
-    #     res = []
-    #     current_values = [0] * len(upper_bounds)
-    #     while True:
-    #         res.append(tuple(current_values))
-    #         i = len(upper_bounds) - 1
-    #         while i >= 0:
-    #             current_values[i] += 1
-    #             if current_values[i] < upper_bounds[i]:
-    #                 break 
-    #             else:
-    #                 current_values[i] = 0 
-    #                 i -= 1
-    #         if i < 0:
-    #             break
-    #     return np.array(res,dtype=int)           
-            
-    
-    # def rewards(self,state,action):  # state=[pol_in_front, pol_leftright, pol_near, obs_left, obs_right, obs_near_left, obs_near_right]
-    #     if action==2:                #                0            1           2         3          4            5              6
-    #         if state[3]:
-    #             return -100,True
-    #         elif (state[1] and state[2]) or state[5]:
-    #             return -10,False
-    #     elif action==1:
-    #         if state[4]:
-    #             return -100,True
-    #         elif (not(state[1]) and state[2]) or state[6]:
-    #             return -10,False
-    #     elif action==0:
-    #         if state[2]:
-    #             return -10,False
-    #         elif state[0]:
-    #             return -100,True
-    #     return 10,False
-            
-    # def value_iteration(self):
-    #     actions=[0,1,2]
-    #     states=self.list_states(self.space_size)
-    #     for state in states:
-    #         for action in actions:
-                
-    #             #self.Qvalues[(*state, action)]=self.rewards(state,action)
-                
-                
         

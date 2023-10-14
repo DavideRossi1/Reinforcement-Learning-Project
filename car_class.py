@@ -93,24 +93,41 @@ class game():
         """
         gameover=False
         # for each action, check if the car didn't crash with the wall, then move the car
-        if action==2: #left
-            if self.carposw-carspeed>=0:
-                self.rendercar(0)
-                self.carposw-=carspeed
-                self.rendercar(1)   
-            else:
-                gameover=True
+        match action:
+            case 2: #left
+                if self.carposw-carspeed>=0:
+                    self.rendercar(0)
+                    self.carposw-= carspeed
+                    self.rendercar(1)   
+                else:
+                    gameover=True
                 
-        elif action==1: #right
-            if self.carposw+self.car_width+carspeed<=self.width:
-                self.rendercar(0)
-                self.carposw+=carspeed
-                self.rendercar(1)
-            else:
-                gameover=True
+            case 1: #right
+                if self.carposw+self.car_width+carspeed<=self.width:
+                    self.rendercar(0)
+                    self.carposw+=carspeed
+                    self.rendercar(1)
+                else:
+                    gameover=True
                 
-        elif action==0: #stay still
-            pass
+            case 0: #stay still
+                pass
+            case 4:
+                if self.carposw-C.BOOST*carspeed>=0:
+                    self.rendercar(0)
+                    self.carposw-= C.BOOST*carspeed
+                    self.rendercar(1)   
+                else:
+                    gameover=True
+            case 3:
+                if self.carposw+self.car_width+C.BOOST*carspeed<=self.width:
+                    self.rendercar(0)
+                    self.carposw+=C.BOOST*carspeed
+                    self.rendercar(1)
+                else:
+                    gameover=True
+                
+                
         return gameover
     
     def movecarPM(self,action,carspeed):
@@ -118,12 +135,18 @@ class game():
         Move your car along the horizontal axis with pacman effect
         """
         self.rendercar(0)
-        if action==2: #left
-            self.carposw=(self.carposw-carspeed)%self.width 
-        elif action==1: #right
+        match action:
+            case 2: #left
+                self.carposw=(self.carposw-carspeed)%self.width 
+            case 1: #right
                 self.carposw=(self.carposw+carspeed)%self.width      
-        elif action==0: #stay still
-            pass
+            case 0: #stay still
+                pass
+            case 4: # left with boost
+                self.carposw=(self.carposw-C.BOOST*carspeed)%self.width 
+            case 3:
+                self.carposw=(self.carposw+C.BOOST*carspeed)%self.width      
+
         self.rendercar(1)
         return False
     
@@ -141,7 +164,15 @@ class game():
             self.crash()
             reward=-1000
         else:
-            reward= 1*self.car_dist()/float(C.ENVSIZE[1]) + (0 if C.PACMAN else 2/(1+float(abs(self.carposw-C.ENVSIZE[1]/2))))
+            reward= 1*self.car_dist()/float(C.ENVSIZE[1]) + \
+                   (0 if C.PACMAN else 2/(1+float(abs(self.carposw-C.ENVSIZE[1]/2))))-\
+                    (100 if (action==3 or action==4) else 0)+\
+                    (0 if (action==0) else -1)
+                    
+        if self.score>C.MAXSCORE:
+            print('GAME WON, score: ',self.score)
+            self.crash()
+            reward+=1000
         return reward,gameover
     
     def render(self): 
