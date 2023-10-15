@@ -53,6 +53,7 @@ def update_env(frame, env, Agent):
     
     
     
+    
 def main():
     """
     Main function of the game: plays the game and plots/renders the updates 
@@ -65,9 +66,10 @@ def main():
     Agent1 = Agent(C.AGENT) 
     
     # if desired, save the scores in a file
-    if C.SAVESCORES!=0:
+    if C.SAVESCORESNAME!=0:
         f=open(C.SAVESCORES,'a')
-        f.write("Algorithm: {}, Speed: {}, Environment size: {}, Car size: {}, Counter: {}, Nsteps: {}".format(C.AGENT,C.SPEED,C.ENVSIZE,C.CARSIZE,C.COUNTER,C.NSTEPS))
+        comments="Algorithm: {}, Speed: {}, Boost: {}, PM: {}, Env size: {}, Car size: {}, Counter: {}, Nsteps: {}, Gamma: {}, LearnRate: {}, Eps: {}, Epsdecay: {}".format(C.AGENT,C.SPEED,C.BOOST,C.PACMAN,C.ENVSIZE,C.CARSIZE,C.COUNTER,C.NSTEPS,C.GAMMA,C.LEARNING_RATE,C.EPSILON,C.EPSDECAY)
+        f.write(comments)
         f.close()
         
     # if desired, plot the environment
@@ -91,8 +93,10 @@ def main():
         print("Max score: ", env.maxscore)
         
     # if desired, save the learned policy in a file
-    if C.EXPORTPOLICY!=0:
+    if C.EXPORTPOLICYNAME!=0:
         Agent1.model.save_policy()
+
+
 
 
 # Let's play!
