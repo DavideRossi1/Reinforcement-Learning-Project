@@ -1,10 +1,3 @@
-# Note: Before running for the first time, the following command from terminal 
-# could be necessary to avoid errors, depending on your OS and on installed libraries:
-#export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
-
-# build environment
-import os
-os.chdir('/home/davide/Desktop/Reinforcement_L/exam')
 import pygame
 import time
 import random
@@ -73,11 +66,15 @@ if TESTING:
     carimg=pygame.image.load("car_images/car00.png").convert_alpha()
 elif PLAYING:
     carimg=pygame.image.load("car_images/car0.png").convert_alpha()
+    
+    
 def car(x,y): 
     """
     Displays the car in the position (x,y)
     """
     display.blit(carimg,(x,y))     #set position of the car
+    
+    
     
 def crash(score): 
     """
@@ -87,6 +84,8 @@ def crash(score):
         message_display("Game Over",score)
         time.sleep(3)           # Wait 3 seconds before starting a new game
     loop()                      #call the loop function to restart the game
+
+
 
 def message_display(text,score): 
     """"
@@ -100,6 +99,8 @@ def message_display(text,score):
     display.blit(textsurf,textrect)                    #display the messages
     display.blit(textsurf2,textrect2)
     pygame.display.update()
+    
+    
     
 # display the message after the car has crashed
 def text_object(text,font,color):    
@@ -154,6 +155,9 @@ def loop():
                 crash(score)   
         
         pygame.display.update() # update the display
+        
+        
+        
 loop() # start the game
 pygame.quit() 
 quit()     
