@@ -2,7 +2,7 @@ import numpy as np
 import Constants as C
 import numpy as np
 class TDControl():
-    def __init__(self,space_size,action_size,gamma=C.GAMMA,learning_rate=C.LEARNING_RATE,algorithm='SARSA'):
+    def __init__(self,space_size,action_size,gamma,learning_rate,algorithm):
         """
         Calculate optimal policy using in-policy Temporal Difference control
         Evaluate Q-value for (S,A) pairs, using one-step updates.
@@ -25,7 +25,7 @@ class TDControl():
         """
         
         # if no policy is imported, initialize Qvalues to 0
-        if C.IMPORTPOLICY==0:
+        if C.IMPORTPOLICYNAME==0:
             self.Qvalues = np.zeros( (*self.space_size, self.action_size) )
             
         # otherwise, import the policy from a txt file

@@ -3,7 +3,7 @@
 
 
  # Integer. Starting speed of both you and the enemy cars:
-SPEED=5          
+SPEED=1          
 
 # Integer. Speed multiplier: when boost is activated, your speed becomes BOOST*SPEED:
 BOOST=4       
@@ -13,16 +13,16 @@ MAXSCORE=100000000
 
 # Integer. Number of points to be scored before increasing the speed of the enemy cars, 
 # hence increasing the difficulty. Set it to a high value to maintain the enemy speed constant:
-COUNTER=10000000   
+COUNTER=100   
 
 # Couple of integers. Height and width of the environment:
-ENVSIZE=(100,100)
+ENVSIZE=(20,20)
 
 # Couple of integers. Height and width of the cars. A good choice to have something realistic is ~1/4 of 
 # the height and ~1/6 of the width of the environment. Avoid setting them with too big values (larger than ~1/3 of 
 # the height and ~1/4 of the width of the environment in the case of no pacman), otherwise it will be too 
 # difficult to avoid the enemy cars:
-CARSIZE=(25,20)    
+CARSIZE=(5,4)    
 
 # Boolean. If True, environment becomes a continuous space, hence you can exit the environment 
 # from one side and re-enter from the opposite side:
@@ -34,11 +34,11 @@ IMPORTPOLICYNAME="policy_ESARSA_hybrid_noPM.txt"
 
 # String, or 0. If you want to save the learned policy in a file, set with the name of the file. 
 # Otherwise, set with 0:
-EXPORTPOLICYNAME="policy_ESARSA_hybrid_noPM_bigenv.txt"
+EXPORTPOLICYNAME="policy_ESARSA_hybrid_noPM_diff4.txt"
 
 # String, or 0. If you want to save the scores in a file, set with the name of the file. 
 # Otherwise, set with 0:              
-SAVESCORESNAME="scores_ESARSA_hybrid_noPM_bigenv.txt"                    
+SAVESCORESNAME="scores_ESARSA_hybrid_noPM_diff4.txt"                    
 
 # Boolean. If True, the environment is printed in the terminal at each step:
 PRINTSTEPS=False   

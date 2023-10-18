@@ -31,9 +31,31 @@ export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
 ### Playing the game
 
 To play the game, you need to run the [car_play.py](./car_play/car_play.py) file while being inside the [car_play](./car_play) directory. To stop it, just close thw window. The game will start with a car in the middle of the screen, and you can control it with the arrow keys. The game ends when the car hits an obstacle, and the score is shown in the terminal.\
-The original code of this part, which has been revised and improved, can be found [here](https://geekyhumans.com/how-to-create-a-car-racing-game-in-python/).
 
 ### Running the RL algorithm
 
-Before running, have a look and set up the parameters in the [Constants.py](./Project_files/Constants.py) file as you prefer. Then, run the [main.py](./Project_files/main.py) file while being inside the [Project_files](./Project_files) directory.\
+Before running, have a look and set up the parameters in the [Constants.py](./Project_files/Constants.py) file as you prefer. Then, run the [main.py](./Project_files/main.py) file while being inside the [Project_files](./Project_files) directory. The game will start and the agent will start playing and learning using the selected policy. If PLOTSTEPS=True was selected, the game will also be played with a graphical interface, so that you can see the agent playing.\
+
+## Results
+
+The results obtained during the project can be found in the [report](./report.pdf).\
+The policies learned during the project are already available to use inside the [no_pacman_policies](./Project_files/no_pacman_policies) and [pacman_policies](./Project_files/pacman_policies) directories.\
+
+The final results are:
+
+Starting agent:
+<img src="/images/starting.gif"/>
+
+
+Learned agent (with boost):
+<img src="/images/improved.gif"/>
+
+
+
+## Credits
+
+The original code of the car game, which has been revised and improved, can be found [here](https://geekyhumans.com/how-to-create-a-car-racing-game-in-python/).\
+
 The implementation of the Temporal Difference algorithm is based on the one done by the course tutor [Emanuele Panizon](https://www.ictp.it/member/emanuele-panizon).
+
+

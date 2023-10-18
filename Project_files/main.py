@@ -48,7 +48,7 @@ def update_env(frame, env, Agent):
     # if desired, plot the environment
     if C.PLOTSTEPS:
         plt.clf()  # Clear the current plot
-        plt.imshow(env.env, cmap='gray', extent=[0, env.width, 0, env.length])  # Update the plot with the new env data
+        plt.imshow(env.env, cmap='gray', extent=[0, env.width, 0, env.height])  # Update the plot with the new env data
         plt.title(f"Current score: {env.score}, Max Score: {env.maxscore}")
     
     
@@ -68,11 +68,11 @@ def main():
     # if desired, save the scores in a file
     if C.SAVESCORESNAME!=0:
         f=open(C.SAVESCORES,'a')
-        comments="Algorithm: {}, Speed: {}, Boost: {}, PM: {}, Env size: {}, Car size: {}, Counter: {}, Nsteps: {}, Gamma: {}, LearnRate: {}, Eps: {}, Epsdecay: {}".format(C.AGENT,C.SPEED,C.BOOST,C.PACMAN,C.ENVSIZE,C.CARSIZE,C.COUNTER,C.NSTEPS,C.GAMMA,C.LEARNING_RATE,C.EPSILON,C.EPSDECAY)
+        comments="#Algorithm: {}, Speed: {}, Boost: {}, PM: {}, Env size: {}, Car size: {},\n#Counter: {}, Nsteps: {}, Gamma: {}, LearnRate: {}, Eps: {}, Epsdecay: {}\n".format(C.AGENT,C.SPEED,C.BOOST,C.PACMAN,C.ENVSIZE,C.CARSIZE,C.COUNTER,C.NSTEPS,C.GAMMA,C.LEARNING_RATE,C.EPSILON,C.EPSDECAY)
         f.write(comments)
         f.close()
         
-    # if desired, plot the environment
+    # if desired, plot the environment and play the game
     if C.PLOTSTEPS:
         plt.figure(figsize=C.ENVSIZE)
         plt.imshow(env.env, cmap='gray')
@@ -83,14 +83,26 @@ def main():
     else:
         while Agent1.n_steps<C.NSTEPS: 
             
-            # if desired, print the environment
+            # if desired, print the environment on the terminal
             if C.PRINTSTEPS:
-                env.render() # print environment on terminal
+                env.render()
+                
             Agent1.n_steps+=1
             update_env(None, env, Agent1)
+            
         if env.score>env.maxscore:
             env.maxscore=env.score
+            
+            # save the last score if it's a new record, since the last game has not been completed
+            # (useful in case of endless game, if a perfect policy has been reached)
+            if C.SAVESCORESNAME!=0:
+                f=open(C.SAVESCORES,'a')
+                f.write(str(env.score)+', '+str(env.maxscore)+'\n')
+                f.close()
         print("Max score: ", env.maxscore)
+    
+    
+        
         
     # if desired, save the learned policy in a file
     if C.EXPORTPOLICYNAME!=0:

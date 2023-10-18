@@ -131,7 +131,7 @@ class game():
             print('New max score: ',self.maxscore)
             
         # save the new score in the specified file
-        if C.SAVESCORESNAME!=False:
+        if C.SAVESCORESNAME!=0:
             f=open(C.SAVESCORES,'a')
             f.write(str(self.score)+', '+str(self.maxscore)+'\n')
             f.close()

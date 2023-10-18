@@ -15,7 +15,7 @@ class Agent():
         
         self.n_steps=0
         self.eps=C.EPSILON  
-        self.model=TDControl((2,5,2,4,4), 5, algorithm=alg)
+        self.model=TDControl((2,5,2,4,4), 5, gamma=C.GAMMA,learning_rate=C.LEARNING_RATE, algorithm=alg)
        
        
        
@@ -24,17 +24,17 @@ class Agent():
     # def side_position_binning(self,env):
     #     #print("Car position: ",env.car_x_position)
     #     wall_left=      (env.car_x_position<C.SPEED)                             # wall immediately on the left
-    #     wall_right=     (env.car_x_position+env.car_width>env.w-C.SPEED)   # wall immediately on the right
+    #     wall_right=     (env.car_x_position+env.car_width>env.w-C.SPEED)         # wall immediately on the right
     #     wall_near_left= (env.car_x_position<2*C.SPEED)                           # wall 2 steps on the left
-    #     wall_near_right=(env.car_x_position+env.car_width>env.w-2*C.SPEED) # wall 2 steps on the right
+    #     wall_near_right=(env.car_x_position+env.car_width>env.w-2*C.SPEED)       # wall 2 steps on the right
     #     enemy_left=       (env.l-env.enemy_y_position<2*env.car_height and (0<=env.car_x_position-env.enemy_x_position-env.car_width<C.SPEED)) # police car immediately on the left
     #     enemy_right=      (env.l-env.enemy_y_position<2*env.car_height and (0<=env.enemy_x_position-env.car_x_position-env.car_width<C.SPEED)) # police car immediately on the right
     #     enemy_near_left=  (env.l-env.enemy_y_position<2*env.car_height and (0<=env.car_x_position-env.enemy_x_position-env.car_width<2*C.SPEED)) # police car 2 steps on the left
     #     enemy_near_right= (env.l-env.enemy_y_position<2*env.car_height and (0<=env.enemy_x_position-env.car_x_position-env.car_width<2*C.SPEED)) # police car 2 steps on the right
     #     obstacle_left=wall_left or enemy_left                   # if you move left you lose
     #     obstacle_right=wall_right or enemy_right                # if you move right you lose
-    #     obs_near_left=wall_near_left or enemy_near_left    # if you move left 2 times you lose
-    #     obs_near_right=wall_near_right or enemy_near_right # if you move right 2 times you lose
+    #     obs_near_left=wall_near_left or enemy_near_left         # if you move left 2 times you lose
+    #     obs_near_right=wall_near_right or enemy_near_right      # if you move right 2 times you lose
     #     #pos=[obstacle_left or obstacle_right,obs_near_left or obs_near_right]enemy_left
     #     pos=[obstacle_left,obstacle_right,obs_near_left,obs_near_right]
     #     return pos
@@ -79,7 +79,7 @@ class Agent():
             # 3: wall or enemy car farther than 2 boosted steps on the left/right
         
         # Notice that to compute the distance from walls we don't use modules, since we are 
-        # not interested to the wall position in the case of continuous space (PACMAN=True)
+        # not interested in walls position in the case of continuous space (PACMAN=True)
         wall_left_distance=env.car_x_position
         wall_right_distance=env.width-(env.car_x_position+env.car_width)
 
@@ -163,7 +163,7 @@ class Agent():
         
         # Boolean value that tells if the enemy car is on the left of the car 
         # (hence, if it is False the enemy is on the right)
-        enemy_leftright = (minimum_distance==enemy_left_distance) # police car on the left of the car if true, on the right (possibly center) if false
+        enemy_leftright = (minimum_distance==enemy_left_distance)
         return [enemy_in_front,pol_dist,enemy_leftright]
         
         
