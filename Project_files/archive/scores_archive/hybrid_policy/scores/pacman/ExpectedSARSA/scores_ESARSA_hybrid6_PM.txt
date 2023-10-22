@@ -1,0 +1,4 @@
+#Algorithm: ExpectedSARSA, Speed: 1, Boost: 6, PM: True, Env size: (20, 20), Car size: (5, 4),
+#Counter: 10000000, Nsteps: 10000000, Gamma: 1, LearnRate: 0.01, Eps: 0.5, Epsdecay: 0.9
+# obtained from hybrid4, improved with boost=6
+500000, 500000

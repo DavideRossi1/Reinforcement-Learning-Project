@@ -1,0 +1,10 @@
+#Algorithm: ExpectedSARSA, Speed: 1, Boost: 4, PM: True, Env size: (20, 20), Car size: (5, 4),
+#Counter: 10000000, Nsteps: 10000000, Gamma: 1, LearnRate: 0.01, Eps: 0.5, Epsdecay: 0.9
+4, 4
+0, 4
+0, 4
+113422, 113422
+21, 113422
+0, 113422
+28773, 113422
+357776, 357776

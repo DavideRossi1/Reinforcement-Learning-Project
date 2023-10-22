@@ -13,17 +13,17 @@ class game():
     def __init__(self, height, width, car_height, car_width):
         """
         Initialize the environment by setting the height and width of the environment and the 
-        height and width of the cars, which we'll call cars and assume to be equally sized.
-        Car position variable refers to the top left corner of the car.
+        height and width of the cars, which we assume to be equally sized.
+        Car position variables refer to the top left corner of the car.
         """
-        self.height=height                              # height of the environment
-        self.width=width                                # width of the environment
-        self.car_height=car_height                      # height of the cars
-        self.car_width=car_width                        # width of the cars
-        self.env=np.zeros((height,width),dtype=int)     # initialize the environment as a matrix of zeros
+        self.height=height                                 # height of the environment
+        self.width=width                                   # width of the environment
+        self.car_height=car_height                         # height of the cars
+        self.car_width=car_width                           # width of the cars
+        self.env=np.zeros((height,width),dtype=int)        # initialize the environment as a matrix of zeros
         self.car_x_position=(self.width-self.car_width)//2 # position your car in the center of the last row
-        self.render_car(1)                               # generate car
-        self.generate_enemy_car()                              # generate enemy car
+        self.render_car(1)                                 # generate car
+        self.generate_enemy_car()                          # generate enemy car
         self.score=0     
         self.maxscore=0
         
@@ -47,7 +47,7 @@ class game():
         """
         Render the enemy car inside the environment: bool=1 to place it, bool=0 to remove it
         """
-        # if enemy car is near the end, render only the part of the car that is in the environment
+        # if enemy car is near the end, render only the part of the car that is still inside the environment
         highest_position=min(self.car_height, self.height-self.enemy_y_position)
         
         for i in range(highest_position): 
@@ -75,7 +75,7 @@ class game():
 
     def car_distance(self):
         """
-        Return the minimum horizontal distance between a side of your object and a side of the enemy object
+        Return the minimum horizontal distance between a side of your car and a side of the enemy car
         """
         left_distance= (self.enemy_x_position-self.car_x_position)%self.width
         right_distance=(self.car_x_position-self.enemy_x_position)%self.width
@@ -250,13 +250,14 @@ class game():
         """
         
         # move your car and check if it crashed with the wall
-        gameover_wall=self.movecarPM(action,carspeed) if C.PACMAN else self.movecar(action,carspeed) 
+        gameover_wall = self.movecarPM(action,carspeed) if C.PACMAN \
+                   else self.movecar(action,carspeed) 
         
          # move enemy car and check if it crashed with your car
-        gameover_car=self.move_enemy_car(enemyspeed)     
+        gameover_car = self.move_enemy_car(enemyspeed)     
         
         # game is over if your car crashed with the wall or with the enemy car
-        gameover=gameover_wall or gameover_car      
+        gameover = gameover_wall or gameover_car      
         if gameover:
             self.crash()
             reward=-1000
@@ -267,16 +268,15 @@ class game():
             # 3) if you used the boost, you get a negative reward (to discourage the use of the it and only use it in case of emergency)
             # 4) if you moved, you get a slightly negative reward (to encourage the agent to move only when necessary and to stand still when waiting for the enemy)
             
-            reward= 1*self.car_distance()/float(C.ENVSIZE[1]) +  \
-                   (0 if C.PACMAN else 2/(1+float(abs(self.car_x_position-C.ENVSIZE[1]/2))))+\
-                   (-100 if (action==3 or action==4) else 0)+\
-                   (0 if (action==0) else -1)
+            reward = self.car_distance()/float(C.ENVSIZE[1])  +                                         \
+                    (0 if C.PACMAN   else    2/(1+float(abs(self.car_x_position-C.ENVSIZE[1]/2)))) +    \
+                 (-100 if (action==3 or action==4)   else   0)   +                                   \
+                    (0 if (action==0)   else   -1)
         
-        # if you reached the maximum score, you won the game: environment is reset and you get a big reward
+        # if you reached the maximum score, you won the game: environment is reset
         if self.score>C.MAXSCORE:
             print('GAME WON, score: ',self.score)
             self.crash()
-            reward=1000
         
         return reward,gameover
     

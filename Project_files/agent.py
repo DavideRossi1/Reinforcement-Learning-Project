@@ -147,19 +147,39 @@ class Agent():
         car_vertical_distance=env.height-env.enemy_y_position-2*env.car_height
         
         # define a constant needed to normalize the results
+        b=0 if env.car_width%(C.BOOST*C.SPEED)==0 else 1
         c=0 if env.car_width%C.SPEED==0 else 1
-        
+        #min_num_steps=env.car_width//(C.BOOST*C.SPEED)+b
+        #min_num_steps2=env.car_width//C.SPEED+c
         # In this case I decided to use a different binning:
         # 0: enemy car in front of the car, crash in the next step is nothing changes
         # 1: enemy car in front of the car, crash in 2 steps from now if nothing changes
-        # 2: enemy car in front of the car, but you can escape if you use boost repeatedly in the correct direction
-        # 3: enemy car in front of the car, but you can escape if you move repeatedly in the correct direction
+        # 2: enemy car in front of the car, in the worst case too close to escape even using boost 
+        # 3: enemy car in front of the car, in the worst case too close to escape without using boost
         # 4: enemy car not in front of the car or very far away
         pol_dist= 0 if (enemy_in_front and (car_vertical_distance < C.SPEED)) else \
                   1 if (enemy_in_front and (car_vertical_distance<2*C.SPEED)) else \
-                  2 if (enemy_in_front and (car_vertical_distance<env.car_width//(C.BOOST*C.SPEED)+c)) else \
+                  2 if (enemy_in_front and (car_vertical_distance<env.car_width//(C.BOOST*C.SPEED)+b)) else \
                   3 if (enemy_in_front and (car_vertical_distance<env.car_width//C.SPEED+c)) else \
                   4
+                  #new:    
+                  #2 if (enemy_in_front and (min_num_steps2<=car_vertical_distance)) else \
+                  #3 if (enemy_in_front and (min_num_steps<=car_vertical_distance)) else \
+                  #4
+                  
+                  #middle:
+                  #2 if (enemy_in_front and (car_vertical_distance<2*C.BOOST*C.SPEED)) else \
+                  #3 if (enemy_in_front and (car_vertical_distance<3*C.BOOST*C.SPEED)) else \
+                  #4    
+                  
+                  # 2 and 3 are actually wrong for 2 reasons: you CANNOT escape if you move repeatedly,
+                  # since the distance is strictly less than the one required to do it, and that factor is
+                  # actually smaller than c.speed in almost every case (it is not only in case of big car with
+                  # small speed and boost), hence it is basically never used since pol_dist will be evaluated as 0,1 or 4!
+                  # Now I can try 2 things:
+                  # - ignore the 2 cases and reduce the number of states
+                  # - change them to higher distance (2*c.boost*c.speed?)
+                  
         
         # Boolean value that tells if the enemy car is on the left of the car 
         # (hence, if it is False the enemy is on the right)
