@@ -147,7 +147,8 @@ class game():
         
     def movecar(self,action,carspeed): 
         """
-        Move your car along the horizontal axis, following the given action and with the given speed, and return the game status
+        Move your car along the horizontal axis, following the given 
+        action and with the given speed, and return the game status
         """
         gameover=False
         
@@ -213,13 +214,16 @@ class game():
     
     def movecarPM(self,action,carspeed):
         """
-        Move your car along the horizontal axis in a continuous space, following the given action and with the given speed, and return the game status
+        Move your car along the horizontal axis in a continuous space, following 
+        the given action and with the given speed, and return the game status
         """
         self.render_car(0)
         
         # for each action, check if the car didn't crash with the wall, then move the car
-        # What happens is basically the same as in the movecar function, but the car can exit the environment from one side and re-enter from the opposite side,
-        # hence the position of the car is computed as the remainder of the division by the width of the environment and no crash with the wall is possible
+        # What happens is basically the same as in the movecar function, but the car can exit 
+        # the environment from one side and re-enter from the opposite side, hence the position 
+        # of the car is computed as the remainder of the division by the width of the environment 
+        # and no crash with the wall is possible
         match action:
             
             case 0: #stay still

@@ -172,13 +172,10 @@ class Agent():
                   #3 if (enemy_in_front and (car_vertical_distance<3*C.BOOST*C.SPEED)) else \
                   #4    
                   
-                  # 2 and 3 are actually wrong for 2 reasons: you CANNOT escape if you move repeatedly,
+                  # 2 and 3 are actually not ideal for 2 reasons: you CANNOT escape if you move repeatedly,
                   # since the distance is strictly less than the one required to do it, and that factor is
                   # actually smaller than c.speed in almost every case (it is not only in case of big car with
-                  # small speed and boost), hence it is basically never used since pol_dist will be evaluated as 0,1 or 4!
-                  # Now I can try 2 things:
-                  # - ignore the 2 cases and reduce the number of states
-                  # - change them to higher distance (2*c.boost*c.speed?)
+                  # small speed and boost), hence it is rarely used
                   
         
         # Boolean value that tells if the enemy car is on the left of the car 
