@@ -33,7 +33,7 @@ export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
 
 To play the game, you need to run the [car_play.py](./car_play/car_play.py) file while being inside the [car_play/](./car_play) directory. The game will start with a car in the middle of the screen, and you can control it with the arrow keys. The game ends when the car hits an obstacle, and the score is shown. To stop playing, just close the window.
 
-<img src="/images/play.png"/>
+<img src="/images/play.png" width=300/>
 
 ### Running the RL algorithm
 
