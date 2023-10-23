@@ -6,4 +6,4 @@ This folder contains all the files that were used to create the final report, an
   - [hybrid_pol](./policy_archive/hybrid_pol/): contains some results obtained while testing hybrid policies;
   - [zerostart_big](./policy_archive/zerostart_big/): contains some results obtained while testing policies with a big number of iterations;
   - [zerosart_small](./policy_archive/zerostart_small/): contains some results obtained while testing policies with a small number of iterations (the ones used for the final report);
-- [scores_archive](./scores_archive/): contains all the scores obtained during the tests;
+- [scores_archive](./scores_archive/): contains all the scores obtained during the tests. Same structure as the policy directory.
