@@ -50,7 +50,7 @@ def update_env(frame, env, Agent):
         plt.clf()  # Clear the current plot
         plt.imshow(env.env, cmap='gray', extent=[0, env.width, 0, env.height])  # Update the plot with the new env data
         plt.title(f"Current score: {env.score}, Max Score: {env.maxscore}")
-    
+    return gameover
     
     
     
@@ -71,7 +71,7 @@ def main():
         comments="#Algorithm: {}, Speed: {}, Boost: {}, PM: {}, Env size: {}, Car size: {},\n#Counter: {}, Nsteps: {}, Gamma: {}, LearnRate: {}, Eps: {}, Epsdecay: {}\n".format(C.AGENT,C.SPEED,C.BOOST,C.PACMAN,C.ENVSIZE,C.CARSIZE,C.COUNTER,C.NSTEPS,C.GAMMA,C.LEARNING_RATE,C.EPSILON,C.EPSDECAY)
         f.write(comments)
         f.close()
-        
+    countgames=0
     # if desired, plot the environment and play the game
     if C.PLOTSTEPS:
         plt.figure(figsize=C.ENVSIZE)
@@ -81,14 +81,16 @@ def main():
     
     # otherwise, just play the game
     else:
-        while Agent1.n_steps<C.NSTEPS: 
+        while countgames<C.NGAMES:#Agent1.n_steps<C.NSTEPS: 
             
             # if desired, print the environment on the terminal
             if C.PRINTSTEPS:
                 env.render()
                 
-            Agent1.n_steps+=1
-            update_env(None, env, Agent1)
+            #Agent1.n_steps+=1
+            gameover=update_env(None, env, Agent1)
+            if gameover:
+                countgames+=1
             
         if env.score>env.maxscore:
             env.maxscore=env.score
@@ -99,6 +101,7 @@ def main():
                 f=open(C.SAVESCORES,'a')
                 f.write(str(env.score)+', '+str(env.maxscore)+'\n')
                 f.close()
+        
         print("Max score: ", env.maxscore)
     
     

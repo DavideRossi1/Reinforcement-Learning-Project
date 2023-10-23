@@ -277,6 +277,7 @@ class game():
         if self.score>C.MAXSCORE:
             print('GAME WON, score: ',self.score)
             self.crash()
+            gameover=True
         
         return reward,gameover
     

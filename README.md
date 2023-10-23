@@ -17,6 +17,7 @@ This repository contains 2 folders:
   - [car_class.py](./Project_files/car_class.py): contains the code for the implementation of the car class, that is the one that controls the car in the game
   - [policies](./Project_files/policies): contains the policies used to train the agent, subdivided by typology (Pacman - No Pacman effect) and by algorithm (SARSA, Qlearning, ExpectedSARSA) saved as txt files. By setting the right parameters in the [Constants.py](./Project_files/Constants.py) file, you can import and export policies to try different configurations
   - [scores](./Project_files/scores): contains the scores obtained while executing the model
+  - [archive](./Project_files/): an archive of all the policies and scores obtained during the project. Further information inside the folder
 
 ## How to run the project
 
