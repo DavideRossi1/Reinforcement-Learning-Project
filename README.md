@@ -33,6 +33,8 @@ export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
 
 To play the game, you need to run the [car_play.py](./car_play/car_play.py) file while being inside the [car_play/](./car_play) directory. The game will start with a car in the middle of the screen, and you can control it with the arrow keys. The game ends when the car hits an obstacle, and the score is shown. To stop playing, just close the window.
 
+<img src="/images/play.png"/>
+
 ### Running the RL algorithm
 
 Before running, have a look and set up the parameters in the [Constants.py](./Project_files/Constants.py) file as you prefer. Then, run the [main.py](./Project_files/main.py) file while being inside the [Project_files/](./Project_files) directory. The game will start and the agent will start playing and learning using the selected policy. If PLOTSTEPS=True was selected, the game will also be played with a graphical interface, so that you can see the agent playing.
