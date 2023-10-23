@@ -3,13 +3,13 @@
 
 
  # Integer. Starting speed of both you and the enemy cars:
-SPEED=4          
+SPEED=1          
 
 # Integer. Speed multiplier: when boost is activated, your speed becomes BOOST*SPEED:
-BOOST=4       
+BOOST=1       
 
  # Integer. Maximum score that can be reached, game restarts after it is reached:     
-MAXSCORE=2000    
+MAXSCORE=10000    
 
 # Integer. Number of points to be scored before increasing the speed of the enemy cars, 
 # hence increasing the difficulty. Set it to a high value to maintain the enemy speed constant:
@@ -30,15 +30,15 @@ PACMAN=True
 
 # String, or 0. If you want to use a old policy, set with the name of the file containing the policy. 
 # Otherwise, set with 0 to train a new policy:
-IMPORTPOLICYNAME="boost4.txt"
+IMPORTPOLICYNAME="noboost.txt"
 
 # String, or 0. If you want to save the learned policy in a file, set with the name of the file. 
 # Otherwise, set with 0:
-EXPORTPOLICYNAME=0#"bigcar_boost5.txt"
+EXPORTPOLICYNAME=0
 
 # String, or 0. If you want to save the scores in a file, set with the name of the file. 
 # Otherwise, set with 0:              
-SAVESCORESNAME=0#"bigcar_boost5.txt"                    
+SAVESCORESNAME=0                  
 
 # Boolean. If True, the environment is printed in the terminal at each step:
 PRINTSTEPS=False   
@@ -78,9 +78,10 @@ EPSDECAY=0.90
 
 
 # ------------------------------ DO NOT CHANGE ANYTHING BELOW THIS LINE -------------------------------------
+
 NGAMES=2000           # number of games to be played (used for training purposes, not for plotting)
-NSTEPS=10000000     # number of steps to be played (used for training purposes, not for plotting)
-QSIZE=1600         # size of the Qvalues array, used to save and load the policy, don't change it
+NSTEPS=10000000       # number of steps to be played (used for training purposes, not for plotting)
+QSIZE=1600            # size of the Qvalues array, used to save and load the policy, don't change it
 
 # routine to set the right path for files
 if PACMAN:

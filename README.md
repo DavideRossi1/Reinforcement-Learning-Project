@@ -22,7 +22,7 @@ This repository contains 2 folders:
 ## How to run the project
 
 ### Libraries
-To run the project, you need to have `Python 3` installed on your machine, with `Matplotlib` and `NumPy` libraries. If you want to play the game with [car_play](./car_play), you also need to have `Pygame`, `time` and `random` libraries installed.\
+To run the project, you need to have `Python 3` installed on your machine, with `Matplotlib` and `NumPy` libraries. If you want to play the game with [car_play](./car_play), you also need to have `Pygame`, `time` and `random` libraries installed.
 Also, in case of Linux OS with Ryzen CPU, depending on the installed libraries, `Pygame` could have some troubles finding `radeonsi` drivers. In that case, I suggest either to run the game with a clean Conda environment (containing just the needed libraries) or, in case the problem should not be solved, to manually set the following environment variable before running the game:
 
 ```{}
@@ -31,7 +31,7 @@ export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
 
 ### Playing the game
 
-To play the game, you need to run the [car_play.py](./car_play/car_play.py) file while being inside the [car_play/](./car_play) directory. To stop it, just close the window. The game will start with a car in the middle of the screen, and you can control it with the arrow keys. The game ends when the car hits an obstacle, and the score is shown.
+To play the game, you need to run the [car_play.py](./car_play/car_play.py) file while being inside the [car_play/](./car_play) directory. The game will start with a car in the middle of the screen, and you can control it with the arrow keys. The game ends when the car hits an obstacle, and the score is shown. To stop playing, just close the window.
 
 ### Running the RL algorithm
 
@@ -41,7 +41,7 @@ Before running, have a look and set up the parameters in the [Constants.py](./Pr
 
 The results obtained during the project can be found in the [report](./report.pdf).
 
-The policies learned during the project are already available to use inside the [no_pacman_policies](./Project_files/no_pacman_policies) and [pacman_policies](./Project_files/pacman_policies) directories.
+The policies seen inside the report, and some others more, are already available to use inside the [policies](./Project_files/policies) directory.
 
 The final results are:
 

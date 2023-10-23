@@ -50,6 +50,7 @@ def update_env(frame, env, Agent):
         plt.clf()  # Clear the current plot
         plt.imshow(env.env, cmap='gray', extent=[0, env.width, 0, env.height])  # Update the plot with the new env data
         plt.title(f"Current score: {env.score}, Max Score: {env.maxscore}")
+        
     return gameover
     
     
@@ -91,7 +92,9 @@ def main():
             gameover=update_env(None, env, Agent1)
             if gameover:
                 countgames+=1
-            
+        
+        
+        # routine to save the last score, in case it's a new record and you are playing a fixed number of steps    
         if env.score>env.maxscore:
             env.maxscore=env.score
             
@@ -102,11 +105,11 @@ def main():
                 f.write(str(env.score)+', '+str(env.maxscore)+'\n')
                 f.close()
         
+        
         print("Max score: ", env.maxscore)
     
     
-        
-        
+            
     # if desired, save the learned policy in a file
     if C.EXPORTPOLICYNAME!=0:
         Agent1.model.save_policy()
